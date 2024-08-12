@@ -49,7 +49,11 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-
+/*
+You must use a traditional function expression (not an arrow function) in Mongoose 
+middleware to ensure that this correctly refers to the document being processed. 
+Arrow functions should be avoided in this context.
+*/
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
